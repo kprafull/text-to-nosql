@@ -61,11 +61,16 @@ This will start the web application, and you can access it in your browser at:
 
 ---
 
+## **Architecture Diagram**  
+![Home Page](https://github.com/kprafull/text-to-nosql/blob/main/src/media/arch.png)
+
+---
+
 ## **Example Queries**  
 
-✔️ *"Get all transactions from the last 7 days."*  
-✔️ *"Find the top 5 users with the most purchases."*  
-✔️ *"Show me orders where total_amount is greater than $500."*  
+✔️ *"Get all tables from the database."*  
+✔️ *"Find all the trips made."*  
+✔️ *"Graph all the trips and break them by payment mode."*  
 
 ---
 
