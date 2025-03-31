@@ -69,6 +69,19 @@ This will start the web application, and you can access it in your browser at:
 
 ---
 
+## Sample UI Screenshots
+
+### Home Page
+![Home Page](https://github.com/kprafull/text-to-nosql/blob/main/src/media/tables.png)
+
+### Query View
+![Query View](https://github.com/kprafull/text-to-nosql/blob/main/src/media/trips.png)
+
+### Graph View
+![Graph View](https://github.com/kprafull/text-to-nosql/blob/main/src/media/graph.png)
+
+---
+
 ## **Contributing**  
 
 We welcome contributions! Follow these steps:  
