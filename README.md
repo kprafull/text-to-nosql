@@ -115,12 +115,6 @@ We welcome contributions! Follow these steps:
 
 ---
 
-## **License**  
-
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.  
-
----
-
 ## **Acknowledgements**  
 
 💡 Thanks to the open-source community for their support!  
