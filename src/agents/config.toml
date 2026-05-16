@@ -1,0 +1,20 @@
+[app]
+name = "IcebergApp"
+
+[spark]
+driver_host = "127.0.0.1"
+driver_memory = "4g"
+
+[spark.packages]
+iceberg = "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.8.1"
+
+[spark.sql]
+extensions = "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions"
+
+[spark.catalog.local]
+catalog_impl = "org.apache.iceberg.spark.SparkCatalog"
+type = "hadoop"
+warehouse = "/Users/prafullk/apps/GitHub/text-to-nosql/iceberg-warehouse"
+
+[spark.catalog.spark_catalog]
+type = "hive"
