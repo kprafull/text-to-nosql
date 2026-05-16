@@ -8,7 +8,8 @@ This agent can help you with NOSQL queries and Python code for data analysis. Co
 ## **Features**  
 
 ✅ **Natural Language Querying** – Ask questions in plain English, and the LLM agent generates the appropriate NoSQL queries.  
-✅ **Multi-Database Support** – Works with **Apache Iceberg, Apache Hudi, and Delta Lake**.  
+✅ **Graph Support** – Dynamically analyze and generates graphs to visualize patterns based on the data.
+✅ **Multi-Database Support** – Works with **Apache Iceberg, Apache Hudi, and Delta Lake**.
 ✅ **Streamlit UI** – Interactive web interface for querying and visualizing results.  
 ✅ **LLM-Powered Automation** – Uses advanced AI models to generate accurate queries.  
 ✅ **Extensible Architecture** – Can be adapted for other databases or enhanced with additional features.  
