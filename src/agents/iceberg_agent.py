@@ -1,28 +1,76 @@
+from pathlib import Path
+import tomllib
 import pyspark
 from pyspark.sql import SparkSession
 
-def init():
-    conf = (
-        pyspark.SparkConf()
-            .setAppName('app_name')
-        # first we will define the packages that we need. Iceberg Spark runtime
-            #.set('spark.jars.packages', 'org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.7.1')
-            .set('spark.jars.packages', 'org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.8.1')
-            .set("spark.driver.host", "127.0.0.1")
-            .set("spark.driver.memory", "4g")
-        # This property allows us to add any extensions that we want to use
-            .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions')
-        # configures a new catalog to a particular implementation of SparkCatalog
-            .set('spark.sql.catalog.local', 'org.apache.iceberg.spark.SparkCatalog')
-        # particular type of catalog we are using
-            .set('spark.sql.catalog.local.type', 'hadoop')
-        # engine writes to the warehouse
-            .set('spark.sql.catalog.local.warehouse', '/Users/kumprafu/spark-3.5.4-bin-hadoop3/spark-warehouse')
-        # changes IO impl of catalog, mainly for changing writing data to object storage
-            .set('spark.sql.catalog.spark_catalog.type', 'hive')
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+namespace = "local.db"
+
+def load_config(path: str = "config.toml") -> dict:
+    with open(path, "rb") as f:
+        return tomllib.load(f)
+
+
+def build_spark_conf(cfg: dict) -> pyspark.SparkConf:
+    conf = pyspark.SparkConf()
+
+    conf.setAppName(cfg["app"]["name"])
+
+    conf.set(
+        "spark.jars.packages",
+        cfg["spark"]["packages"]["iceberg"]
     )
 
+    conf.set(
+        "spark.driver.host",
+        cfg["spark"]["driver_host"]
+    )
+
+    conf.set(
+        "spark.driver.memory",
+        cfg["spark"]["driver_memory"]
+    )
+
+    conf.set(
+        "spark.sql.extensions",
+        cfg["spark"]["sql"]["extensions"]
+    )
+
+    conf.set(
+        "spark.sql.catalog.local",
+        cfg["spark"]["catalog"]["local"]["catalog_impl"]
+    )
+
+    conf.set(
+        "spark.sql.catalog.local.type",
+        cfg["spark"]["catalog"]["local"]["type"]
+    )
+
+    conf.set(
+        "spark.sql.catalog.local.warehouse",
+        cfg["spark"]["catalog"]["local"]["warehouse"]
+    )
+
+    conf.set(
+        "spark.namespace",
+        cfg["spark"]["catalog"]["local"]["namespace"]
+    )
+
+    conf.set(
+        "spark.sql.catalog.spark_catalog.type",
+        cfg["spark"]["catalog"]["spark_catalog"]["type"]
+    )
+
+    return conf
+
+def init():
     # Start Spark Session
+    cfg = load_config("agents/config.toml")
+    conf = build_spark_conf(cfg)
+    namespace = conf.get("spark.namespace")
     spark = SparkSession.builder.config(conf=conf).getOrCreate()
     print("== Spark Running ==")
     return spark
@@ -30,7 +78,7 @@ def init():
 def nosql_db_list_tables():
     """list tables in the database"""
     try:
-        tables = spark.sql("SHOW TABLES IN local.db").collect()
+        tables = spark.sql(f"SHOW TABLES IN {namespace}").collect()
         return [row['tableName'] for row in tables]
     except Exception as e:
         logger.error(f"Error listing tables: {e}")
@@ -39,7 +87,7 @@ def nosql_db_list_tables():
 def nosql_db_schema(table_name):
     """schema of table in DB"""
     try:
-        schema_info = spark.sql(f"DESCRIBE TABLE local.db.{table_name}").collect()
+        schema_info = spark.sql(f"DESCRIBE TABLE {namespace}.{table_name}").collect()
         return '\n'.join(str(row) for row in schema_info)
     except Exception as e:
         logger.error(f"Error fetching schema for {table_name}: {e}")
@@ -55,7 +103,7 @@ def nosql_db_query_checker(query):
 def nosql_db_query(query):
     """Execute query"""
     try:
-        spark.sql("USE local.db")
+        spark.sql(f"USE {namespace}")
         print("========query========", query)
         results = spark.sql(query).collect()
         return '\n'.join(str(row) for row in results)

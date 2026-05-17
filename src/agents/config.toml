@@ -15,6 +15,7 @@ extensions = "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions"
 catalog_impl = "org.apache.iceberg.spark.SparkCatalog"
 type = "hadoop"
 warehouse = "/Users/prafullk/apps/GitHub/text-to-nosql/iceberg-warehouse"
+namespace = "local.db"
 
 [spark.catalog.spark_catalog]
 type = "hive"
