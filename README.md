@@ -38,7 +38,7 @@ source venv/bin/activate  # On Windows, use 'env\Scripts\activate'
 pip install -r requirements.txt
 ```
 
-### **4. Setup NoSQL DB (Apache Iceerg)**  
+### **4. Setup NoSQL DB (Apache Iceberg)**  
 
 Use Notebook iceberg/Iceberg_db.ipynb to create database and load sample data.
 
