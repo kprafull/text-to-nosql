@@ -48,6 +48,7 @@ Create a .streamlit/secrets.toml file in the project root:
 
 ```toml
 OPENAI_API_KEY="your_openai_api_key"
+```
 
 ---
 
