@@ -81,7 +81,7 @@ This will start the web application, and you can access it in your browser at:
 ---
 
 ## **Architecture Diagram**  
-![Home Page](https://github.com/kprafull/text-to-nosql/blob/main/src/media/arch.png)
+![Home Page](https://github.com/kprafull/text-to-nosql/blob/main/src/media/architecture.png)
 
 ---
 
