@@ -42,6 +42,13 @@ pip install -r requirements.txt
 
 Use Notebook iceberg/Iceberg_db.ipynb to create database and load sample data.
 
+### **5. OpenAI API Key Setup**  
+
+Create a .streamlit/secrets.toml file in the project root:
+
+```toml
+OPENAI_API_KEY="your_openai_api_key"
+
 ---
 
 ## **Usage**  
