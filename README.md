@@ -1,9 +1,15 @@
-# NOSQL and Python Agent
-This agent can help you with NOSQL queries and Python code for data analysis. Configure your Iceberg database connection.
+# 🚀 Text-to-NoSQL Query Engine
+An AI-powered system that converts natural language into executable NoSQL/database queries using Large Language Models (LLMs).
+
+This project enables users to query datasets using plain English instead of writing complex database queries manually.
 
 # **text-to-nosql**  
 
-**text-to-nosql** is a **Streamlit-based web application** that enables users to query NoSQL databases (such as **Apache Iceberg, Apache Hudi, and Delta Lake**) using **natural language**. Powered by **Large Language Models (LLMs)**, this app translates human-readable text into executable database queries, making NoSQL interactions seamless and intuitive.  
+**text-to-nosql** is a **Streamlit-based web application** that enables users to query NoSQL databases (such as **Apache Iceberg, Apache Hudi, and Delta Lake**) using **natural language**. Powered by **Large Language Models (LLMs)**, this app translates human-readable text into executable database queries, making NoSQL interactions seamless and intuitive. The application dynamically understands database schema context, generates optimized queries, executes them using PySpark + Apache Iceberg, and visualizes results through an interactive Streamlit interface.
+
+Example:
+
+> “Plot all taxi trips with fare greater than 100 from airport pickups by Day”
 
 ## **Features**  
 
